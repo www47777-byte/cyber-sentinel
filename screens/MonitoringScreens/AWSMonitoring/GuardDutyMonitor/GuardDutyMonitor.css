@@ -1,0 +1,610 @@
+/* 📁 파일 위치: src/screens/MonitoringScreens/AWSMonitoring/GuardDutyMonitor/GuardDutyMonitor.css */
+
+/* ==========================================
+   👁️ GuardDuty 모니터링 스타일
+   ========================================== */
+
+.guardduty-monitor {
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 20, 40, 0.9) 100%);
+    color: var(--text-primary, #ffffff);
+    font-family: 'Noto Sans KR', sans-serif;
+    padding: var(--spacing-lg, 20px);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ===== 로딩 상태 ===== */
+.guardduty-monitor.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-lg, 20px);
+    color: var(--primary-blue, #00ccff);
+}
+
+.loading-spinner .spin {
+    width: 48px;
+    height: 48px;
+    animation: spin 1s linear infinite;
+}
+
+/* ===== 헤더 ===== */
+.monitor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xl, 30px);
+    padding-bottom: var(--spacing-lg, 20px);
+    border-bottom: 2px solid rgba(0, 204, 255, 0.2);
+}
+
+.header-left {
+    flex: 1;
+}
+
+.monitor-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 15px);
+    margin-bottom: var(--spacing-sm, 10px);
+}
+
+.title-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--primary-blue, #00ccff);
+    filter: drop-shadow(0 0 10px var(--primary-blue, #00ccff));
+}
+
+.monitor-title h1 {
+    font-size: var(--font-xxxl, 28px);
+    font-weight: var(--font-bold, 700);
+    color: var(--text-primary, #ffffff);
+    margin: 0;
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+}
+
+.monitor-subtitle {
+    font-size: var(--font-md, 14px);
+    color: var(--text-secondary, #888888);
+    margin-left: 47px;
+}
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 15px);
+}
+
+.severity-filter,
+.time-range-selector,
+.refresh-btn,
+.download-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 8px;
+    color: var(--primary-blue, #00ccff);
+    padding: var(--spacing-sm, 10px) var(--spacing-md, 15px);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-sm, 14px);
+    font-weight: var(--font-medium, 500);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.refresh-btn,
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 8px);
+}
+
+.severity-filter:hover,
+.time-range-selector:hover,
+.refresh-btn:hover,
+.download-btn:hover {
+    border-color: var(--primary-blue, #00ccff);
+    background: rgba(0, 204, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ===== 메트릭 요약 ===== */
+.metrics-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg, 20px);
+    margin-bottom: var(--spacing-xl, 30px);
+}
+
+.metric-card {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 204, 255, 0.2);
+    border-radius: 12px;
+    padding: var(--spacing-lg, 20px);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 15px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.metric-card:hover {
+    border-color: var(--primary-blue, #00ccff);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 204, 255, 0.2);
+}
+
+.metric-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-blue, #00ccff), rgba(0, 204, 255, 0.3));
+}
+
+.metric-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 204, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue, #00ccff);
+    flex-shrink: 0;
+}
+
+.metric-icon.critical {
+    background: rgba(255, 0, 64, 0.1);
+    color: var(--danger-red, #ff0040);
+}
+
+.metric-icon.active {
+    background: rgba(255, 170, 0, 0.1);
+    color: #ffaa00;
+}
+
+.metric-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.metric-content {
+    flex: 1;
+}
+
+.metric-value {
+    font-size: var(--font-xxl, 24px);
+    font-weight: var(--font-bold, 700);
+    color: var(--text-primary, #ffffff);
+    margin-bottom: var(--spacing-xs, 4px);
+    text-shadow: 0 0 5px rgba(0, 204, 255, 0.3);
+}
+
+.metric-label {
+    font-size: var(--font-sm, 14px);
+    color: var(--text-secondary, #888888);
+    margin-bottom: var(--spacing-xs, 8px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.metric-change {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 4px);
+    font-size: var(--font-xs, 12px);
+    font-weight: var(--font-medium, 500);
+}
+
+.metric-change.positive {
+    color: var(--success-green, #00ff41);
+}
+
+.metric-change.negative {
+    color: var(--danger-red, #ff0040);
+}
+
+.metric-change svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* ===== 위협 목록 ===== */
+.threats-section {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 204, 255, 0.2);
+    border-radius: 12px;
+    padding: var(--spacing-lg, 20px);
+    margin-bottom: var(--spacing-xl, 30px);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-lg, 20px);
+    padding-bottom: var(--spacing-md, 15px);
+    border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 10px);
+    font-size: var(--font-xl, 20px);
+    font-weight: var(--font-bold, 700);
+    color: var(--text-primary, #ffffff);
+}
+
+.section-title svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-blue, #00ccff);
+}
+
+.section-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 10px);
+}
+
+.search-box {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 8px;
+    color: var(--text-primary, #ffffff);
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: var(--font-sm, 14px);
+    width: 200px;
+    transition: all 0.3s ease;
+}
+
+.search-box:focus {
+    outline: none;
+    border-color: var(--primary-blue, #00ccff);
+    background: rgba(0, 204, 255, 0.05);
+}
+
+.search-box::placeholder {
+    color: var(--text-secondary, #888888);
+}
+
+/* ===== 위협 테이블 ===== */
+.threats-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--spacing-lg, 20px);
+}
+
+.threats-table th,
+.threats-table td {
+    padding: var(--spacing-md, 15px);
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.threats-table th {
+    background: rgba(0, 204, 255, 0.05);
+    color: var(--primary-blue, #00ccff);
+    font-weight: var(--font-bold, 700);
+    font-size: var(--font-sm, 14px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.threats-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.threats-table tbody tr:hover {
+    background: rgba(0, 204, 255, 0.05);
+}
+
+.threat-severity {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs, 6px);
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    border-radius: 6px;
+    font-size: var(--font-xs, 12px);
+    font-weight: var(--font-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.threat-severity.critical {
+    background: rgba(255, 0, 64, 0.2);
+    color: var(--danger-red, #ff0040);
+    border: 1px solid rgba(255, 0, 64, 0.3);
+}
+
+.threat-severity.high {
+    background: rgba(255, 102, 0, 0.2);
+    color: #ff6600;
+    border: 1px solid rgba(255, 102, 0, 0.3);
+}
+
+.threat-severity.medium {
+    background: rgba(255, 170, 0, 0.2);
+    color: #ffaa00;
+    border: 1px solid rgba(255, 170, 0, 0.3);
+}
+
+.threat-severity.low {
+    background: rgba(0, 255, 65, 0.2);
+    color: var(--success-green, #00ff41);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+}
+
+.threat-type {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 8px);
+    font-weight: var(--font-medium, 500);
+}
+
+.threat-type-icon {
+    width: 16px;
+    height: 16px;
+    color: var(--primary-blue, #00ccff);
+}
+
+.threat-source {
+    font-family: 'Courier New', monospace;
+    font-size: var(--font-sm, 14px);
+    color: var(--text-secondary, #888888);
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-xs, 4px) var(--spacing-sm, 8px);
+    border-radius: 4px;
+}
+
+.threat-actions {
+    display: flex;
+    gap: var(--spacing-xs, 6px);
+}
+
+.action-btn {
+    background: transparent;
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 4px;
+    color: var(--primary-blue, #00ccff);
+    padding: var(--spacing-xs, 6px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.action-btn:hover {
+    border-color: var(--primary-blue, #00ccff);
+    background: rgba(0, 204, 255, 0.1);
+}
+
+.action-btn.danger:hover {
+    border-color: var(--danger-red, #ff0040);
+    background: rgba(255, 0, 64, 0.1);
+    color: var(--danger-red, #ff0040);
+}
+
+.action-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* ===== 페이지네이션 ===== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-sm, 10px);
+    margin-top: var(--spacing-xl, 30px);
+    padding-top: var(--spacing-lg, 20px);
+    border-top: 1px solid rgba(0, 204, 255, 0.1);
+}
+
+.pagination-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 6px;
+    color: var(--primary-blue, #00ccff);
+    padding: var(--spacing-sm, 8px) var(--spacing-md, 12px);
+    font-size: var(--font-sm, 14px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 36px;
+    text-align: center;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    border-color: var(--primary-blue, #00ccff);
+    background: rgba(0, 204, 255, 0.1);
+}
+
+.pagination-btn.active {
+    background: var(--primary-blue, #00ccff);
+    color: var(--bg-primary, #000000);
+    border-color: var(--primary-blue, #00ccff);
+}
+
+.pagination-btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    color: var(--text-secondary, #888888);
+    font-size: var(--font-sm, 14px);
+    margin: 0 var(--spacing-lg, 20px);
+}
+
+/* ===== 애니메이션 ===== */
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.metric-card,
+.threats-section {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 1200px) {
+    .metrics-summary {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .header-controls {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm, 10px);
+    }
+}
+
+@media (max-width: 768px) {
+    .guardduty-monitor {
+        padding: var(--spacing-md, 15px);
+    }
+    
+    .monitor-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-lg, 20px);
+    }
+    
+    .metrics-summary {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md, 15px);
+    }
+    
+    .section-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .search-box {
+        width: 100%;
+        max-width: 200px;
+    }
+    
+    .threats-table {
+        font-size: var(--font-xs, 12px);
+    }
+    
+    .threats-table th,
+    .threats-table td {
+        padding: var(--spacing-sm, 8px);
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+        gap: var(--spacing-xs, 6px);
+    }
+}
+
+@media (max-width: 480px) {
+    .monitor-title h1 {
+        font-size: var(--font-xl, 20px);
+    }
+    
+    .metric-card {
+        padding: var(--spacing-md, 15px);
+    }
+    
+    .metric-value {
+        font-size: var(--font-xl, 18px);
+    }
+    
+    .threats-table th,
+    .threats-table td {
+        padding: var(--spacing-xs, 6px);
+    }
+    
+    .threat-actions {
+        flex-direction: column;
+        gap: var(--spacing-xs, 4px);
+    }
+}
+
+/* ===== 스크롤바 스타일링 ===== */
+.guardduty-monitor ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.guardduty-monitor ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.guardduty-monitor ::-webkit-scrollbar-thumb {
+    background: rgba(0, 204, 255, 0.3);
+    border-radius: 4px;
+}
+
+.guardduty-monitor ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 204, 255, 0.5);
+}
+
+/* ===== 접근성 개선 ===== */
+.guardduty-monitor *:focus {
+    outline: 2px solid var(--primary-blue, #00ccff);
+    outline-offset: 2px;
+}
+
+.guardduty-monitor button:focus,
+.guardduty-monitor input:focus,
+.guardduty-monitor select:focus {
+    outline: 2px solid var(--primary-blue, #00ccff);
+    outline-offset: 2px;
+}
+
+/* ===== 다크 테마 최적화 ===== */
+@media (prefers-color-scheme: dark) {
+    .guardduty-monitor {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 15, 30, 0.95) 100%);
+    }
+    
+    .metric-card,
+    .threats-section {
+        background: rgba(0, 0, 0, 0.5);
+        border-color: rgba(0, 204, 255, 0.3);
+    }
+}
