@@ -1,0 +1,290 @@
+/* 📁 파일 위치: src/App.css */
+
+/* ==========================================
+   🚀 메인 앱 스타일
+   ========================================== */
+
+/* CSS 변수 정의 */
+:root {
+    --primary-blue: #00ccff;
+    --success-green: #00ff41;
+    --warning-yellow: #ffaa00;
+    --danger-red: #ff0040;
+    --text-primary: #ffffff;
+    --text-secondary: #888888;
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #1a1a1a;
+    --bg-glass: rgba(0, 0, 0, 0.3);
+    --bg-glass-hover: rgba(0, 204, 255, 0.1);
+    --glass-effect: blur(10px);
+    
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 12px;
+    --spacing-lg: 16px;
+    --spacing-xl: 20px;
+    --spacing-xxl: 24px;
+    --spacing-xxxl: 32px;
+    --spacing-xxxxl: 40px;
+    
+    --font-xs: 10px;
+    --font-sm: 12px;
+    --font-base: 14px;
+    --font-md: 16px;
+    --font-lg: 18px;
+    --font-xl: 20px;
+    --font-xxl: 24px;
+    --font-xxxl: 28px;
+    
+    --font-light: 300;
+    --font-regular: 400;
+    --font-medium: 500;
+    --font-semibold: 600;
+    --font-bold: 700;
+}
+
+/* 기본 리셋 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* 메인 앱 컨테이너 */
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 20, 40, 0.9) 100%);
+    position: relative;
+}
+
+/* 메인 콘텐츠 영역 */
+.main-content {
+    margin-top: 80px; /* Header 높이 */
+    margin-left: 280px; /* Navigation 너비 */
+    padding: var(--spacing-lg);
+    min-height: calc(100vh - 80px);
+    transition: margin-left 0.3s ease;
+    background: transparent;
+    position: relative;
+}
+
+.main-content.nav-collapsed {
+    margin-left: 80px; /* 축소된 Navigation 너비 */
+}
+
+/* 페이지 플레이스홀더 */
+.page-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 204, 255, 0.2);
+    border-radius: 12px;
+    padding: var(--spacing-xxxxl);
+    text-align: center;
+    margin: var(--spacing-xl) 0;
+}
+
+.page-placeholder h2 {
+    font-size: var(--font-xxxl);
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-lg);
+    text-shadow: 0 0 10px rgba(0, 204, 255, 0.5);
+}
+
+.page-placeholder p {
+    font-size: var(--font-md);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* 배경 애니메이션 효과 */
+.App::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 50%, rgba(0, 204, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 80%, rgba(255, 170, 0, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* 사이버 그리드 배경 */
+.App::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(rgba(0, 204, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 204, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: -1;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(50px, 50px); }
+}
+
+/* 스크롤바 스타일링 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 204, 255, 0.8);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 0;
+        margin-top: 70px;
+        padding: var(--spacing-md);
+    }
+    
+    .main-content.nav-collapsed {
+        margin-left: 0;
+    }
+    
+    .page-placeholder {
+        padding: var(--spacing-xl);
+        margin: var(--spacing-md) 0;
+    }
+    
+    .page-placeholder h2 {
+        font-size: var(--font-xxl);
+    }
+    
+    .page-placeholder p {
+        font-size: var(--font-sm);
+    }
+}
+
+/* 다크 모드 지원 */
+@media (prefers-color-scheme: dark) {
+    .App {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 15, 30, 0.95) 100%);
+    }
+}
+
+/* 접근성 향상 */
+@media (prefers-reduced-motion: reduce) {
+    .App::after {
+        animation: none;
+    }
+    
+    .main-content {
+        transition: none;
+    }
+}
+
+/* 포커스 스타일 */
+*:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* 선택 스타일 */
+::selection {
+    background: rgba(0, 204, 255, 0.3);
+    color: var(--text-primary);
+}
+
+/* 로딩 애니메이션 */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.loading {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* 페이지 전환 애니메이션 */
+.main-content > * {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 유틸리티 클래스 */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+
+.cursor-pointer { cursor: pointer; }
+.cursor-not-allowed { cursor: not-allowed; }
