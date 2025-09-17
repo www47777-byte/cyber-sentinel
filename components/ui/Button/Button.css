@@ -1,0 +1,310 @@
+/* ==========================================
+   🔘 Button.css - 사이버네틱 버튼 스타일
+   ========================================== */
+
+.cyber-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-md);
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-effect);
+    color: var(--text-primary);
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: var(--font-medium);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    user-select: none;
+    text-decoration: none;
+    box-shadow: var(--shadow-small);
+}
+
+.cyber-button:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* ===== 버튼 내용 ===== */
+.cyber-button__content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    z-index: 2;
+}
+
+.cyber-button__text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cyber-button__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cyber-button__icon--loading {
+    animation: spin 1s linear infinite;
+}
+
+/* ===== 글로우 효과 ===== */
+.cyber-button__glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    z-index: 1;
+}
+
+.cyber-button:hover .cyber-button__glow {
+    opacity: 1;
+}
+
+/* ===== 리플 효과 ===== */
+.cyber-button__ripple {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cyber-button:active .cyber-button__ripple {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+}
+
+/* ===== 버튼 크기 ===== */
+.cyber-button--small {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    font-size: var(--font-xs);
+    min-height: 32px;
+}
+
+.cyber-button--medium {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-sm);
+    min-height: 40px;
+}
+
+.cyber-button--large {
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-size: var(--font-md);
+    min-height: 48px;
+}
+
+/* ===== 전체 너비 ===== */
+.cyber-button--full-width {
+    width: 100%;
+}
+
+/* ===== 버튼 variants ===== */
+
+/* Primary - 파란 테마 */
+.cyber-button--primary {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+    border-color: var(--primary-blue);
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-button--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 204, 255, 0.4);
+    border-color: var(--glow-blue);
+}
+
+.cyber-button--primary:active {
+    transform: translateY(0);
+}
+
+/* Secondary - 투명 파란 테두리 */
+.cyber-button--secondary {
+    background: var(--bg-glass);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+}
+
+.cyber-button--secondary:hover {
+    background: var(--info-bg);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(0, 204, 255, 0.3);
+}
+
+/* Danger - 빨간 테마 */
+.cyber-button--danger {
+    background: linear-gradient(135deg, var(--danger-red), #ff4757);
+    border-color: var(--danger-red);
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-button--danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 0, 64, 0.4);
+    border-color: #ff0040;
+}
+
+/* Success - 초록 테마 */
+.cyber-button--success {
+    background: linear-gradient(135deg, var(--success-green), #2ed573);
+    border-color: var(--success-green);
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-button--success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+    border-color: #00ff88;
+}
+
+/* Warning - 노란 테마 */
+.cyber-button--warning {
+    background: linear-gradient(135deg, var(--warning-yellow), #ffd700);
+    border-color: var(--warning-yellow);
+    color: black;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.cyber-button--warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 170, 0, 0.4);
+    border-color: #ffaa00;
+}
+
+/* Ghost - 완전 투명 */
+.cyber-button--ghost {
+    background: transparent;
+    border-color: transparent;
+    color: var(--text-secondary);
+}
+
+.cyber-button--ghost:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--border-secondary);
+    color: var(--text-primary);
+}
+
+/* ===== 비활성화 상태 ===== */
+.cyber-button--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.cyber-button--disabled:hover {
+    transform: none;
+    box-shadow: var(--shadow-small);
+}
+
+.cyber-button--disabled .cyber-button__glow {
+    display: none;
+}
+
+/* ===== 로딩 상태 ===== */
+.cyber-button--loading {
+    cursor: wait;
+}
+
+.cyber-button--loading .cyber-button__text {
+    opacity: 0.7;
+}
+
+/* ===== 특별 효과 ===== */
+.cyber-button--primary {
+    position: relative;
+}
+
+.cyber-button--primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.cyber-button--primary:hover::before {
+    transform: translateX(100%);
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .cyber-button--small {
+        min-height: 28px;
+        padding: var(--spacing-xs);
+        font-size: 11px;
+    }
+    
+    .cyber-button--medium {
+        min-height: 36px;
+        padding: var(--spacing-xs) var(--spacing-md);
+        font-size: var(--font-xs);
+    }
+    
+    .cyber-button--large {
+        min-height: 44px;
+        padding: var(--spacing-sm) var(--spacing-lg);
+        font-size: var(--font-sm);
+    }
+}
+
+/* ===== 애니메이션 최적화 ===== */
+.cyber-button {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* ===== 접근성 향상 ===== */
+@media (prefers-reduced-motion: reduce) {
+    .cyber-button {
+        transition: none;
+    }
+    
+    .cyber-button__icon--loading {
+        animation: none;
+    }
+    
+    .cyber-button:hover {
+        transform: none;
+    }
+}
+
+/* ===== 고대비 모드 ===== */
+@media (prefers-contrast: high) {
+    .cyber-button {
+        border-width: 2px;
+    }
+    
+    .cyber-button--primary {
+        background: var(--primary-blue);
+        color: white;
+    }
+    
+    .cyber-button--secondary {
+        border-color: var(--primary-blue);
+        color: var(--primary-blue);
+    }
+}

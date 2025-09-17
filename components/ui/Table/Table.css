@@ -1,0 +1,622 @@
+/* ==========================================
+   📋 Table.css - 사이버네틱 테이블 스타일
+   ========================================== */
+
+.cyber-table-container {
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-effect);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    font-family: 'Noto Sans KR', sans-serif;
+    box-shadow: var(--shadow-medium);
+}
+
+/* ===== 툴바 ===== */
+.cyber-table__toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-bottom: 1px solid var(--border-muted);
+    background: var(--bg-card);
+}
+
+.cyber-table__search {
+    position: relative;
+    display: flex;
+    align-items: center;
+    max-width: 300px;
+    flex: 1;
+}
+
+.cyber-table__search-icon {
+    position: absolute;
+    left: var(--spacing-sm);
+    color: var(--text-muted);
+    z-index: 1;
+}
+
+.cyber-table__search-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) var(--spacing-xl);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-muted);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: var(--font-sm);
+    transition: all var(--transition-normal);
+}
+
+.cyber-table__search-input:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.3);
+}
+
+.cyber-table__search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.cyber-table__filters {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+}
+
+/* ===== 테이블 래퍼 ===== */
+.cyber-table__wrapper {
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-blue) transparent;
+}
+
+.cyber-table__wrapper::-webkit-scrollbar {
+    height: 6px;
+}
+
+.cyber-table__wrapper::-webkit-scrollbar-thumb {
+    background: var(--primary-blue);
+    border-radius: 3px;
+}
+
+.cyber-table__wrapper::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* ===== 테이블 ===== */
+.cyber-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: transparent;
+}
+
+/* ===== 테이블 헤드 ===== */
+.cyber-table__head {
+    background: var(--bg-card);
+    border-bottom: 2px solid var(--primary-blue);
+}
+
+.cyber-table__header {
+    padding: var(--spacing-md) var(--spacing-lg);
+    text-align: left;
+    font-weight: var(--font-bold);
+    color: var(--text-primary);
+    font-size: var(--font-sm);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    user-select: none;
+}
+
+.cyber-table__header--sortable {
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.cyber-table__header--sortable:hover {
+    background: var(--bg-glass-hover);
+    color: var(--primary-blue);
+}
+
+.cyber-table__header--sorted {
+    color: var(--primary-blue);
+    background: var(--info-bg);
+}
+
+.cyber-table__header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+}
+
+.cyber-table__header-text {
+    flex: 1;
+}
+
+.cyber-table__sort-icons {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    opacity: 0.5;
+    transition: opacity var(--transition-normal);
+}
+
+.cyber-table__header--sortable:hover .cyber-table__sort-icons {
+    opacity: 1;
+}
+
+.cyber-table__sort-icon {
+    color: var(--text-muted);
+    transition: color var(--transition-normal);
+}
+
+.cyber-table__sort-icon.active {
+    color: var(--primary-blue);
+}
+
+/* ===== 테이블 바디 ===== */
+.cyber-table__body {
+    background: transparent;
+}
+
+.cyber-table__row {
+    border-bottom: 1px solid var(--border-muted);
+    transition: all var(--transition-normal);
+}
+
+.cyber-table__row--body:hover {
+    background: var(--bg-glass-hover);
+}
+
+.cyber-table--hoverable .cyber-table__row--body:hover {
+    background: var(--info-bg);
+    border-color: var(--primary-blue);
+    transform: translateX(2px);
+}
+
+.cyber-table__cell {
+    padding: var(--spacing-md) var(--spacing-lg);
+    color: var(--text-secondary);
+    font-size: var(--font-sm);
+    line-height: 1.5;
+    border-bottom: inherit;
+}
+
+.cyber-table__row--body:hover .cyber-table__cell {
+    color: var(--text-primary);
+}
+
+/* ===== 테이블 변형 ===== */
+
+/* Striped */
+.cyber-table--striped .cyber-table__row--body:nth-child(even) {
+    background: rgba(0, 204, 255, 0.02);
+}
+
+/* Bordered */
+.cyber-table--bordered .cyber-table__cell {
+    border-right: 1px solid var(--border-muted);
+}
+
+.cyber-table--bordered .cyber-table__header {
+    border-right: 1px solid var(--border-muted);
+}
+
+/* Compact */
+.cyber-table--compact .cyber-table__header,
+.cyber-table--compact .cyber-table__cell {
+    padding: var(--spacing-sm);
+}
+
+/* Cyber */
+.cyber-table--cyber {
+    border: 2px solid var(--primary-blue);
+    box-shadow: 0 0 20px rgba(0, 204, 255, 0.3);
+}
+
+.cyber-table--cyber .cyber-table__head {
+    background: linear-gradient(135deg, var(--primary-blue), var(--accent-blue));
+}
+
+.cyber-table--cyber .cyber-table__header {
+    color: white;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.cyber-table--cyber .cyber-table__row--body:hover {
+    background: rgba(0, 204, 255, 0.1);
+    box-shadow: inset 0 0 10px rgba(0, 204, 255, 0.2);
+}
+
+/* ===== 로딩 상태 ===== */
+.cyber-table__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-muted);
+}
+
+.cyber-table__loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--border-muted);
+    border-top: 4px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: var(--spacing-md);
+}
+
+/* ===== 빈 상태 ===== */
+.cyber-table__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-xxl);
+    color: var(--text-muted);
+}
+
+.cyber-table__empty-icon {
+    font-size: var(--font-4xl);
+    opacity: 0.5;
+    margin-bottom: var(--spacing-lg);
+}
+
+.cyber-table__empty-text {
+    font-size: var(--font-md);
+    margin: 0;
+}
+
+/* ===== 페이지네이션 ===== */
+.cyber-table__pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-lg);
+    border-top: 1px solid var(--border-muted);
+    background: var(--bg-card);
+}
+
+.cyber-table__pagination-info {
+    font-size: var(--font-sm);
+    color: var(--text-muted);
+}
+
+.cyber-table__pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.cyber-table__pagination-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    color: var(--text-primary);
+    cursor: pointer;
+    font-size: var(--font-sm);
+    transition: all var(--transition-normal);
+    min-width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cyber-table__pagination-btn:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    transform: translateY(-1px);
+}
+
+.cyber-table__pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.cyber-table__pagination-btn.active {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 204, 255, 0.4);
+}
+
+.cyber-table__pagination-dots {
+    padding: var(--spacing-xs);
+    color: var(--text-muted);
+    font-size: var(--font-sm);
+}
+
+/* ===== 클릭 가능한 행 ===== */
+.cyber-table__row--body {
+    cursor: default;
+}
+
+.cyber-table__row--body:hover {
+    cursor: pointer;
+}
+
+.cyber-table__row--body:active {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.cyber-table__row--body:active .cyber-table__cell {
+    color: white;
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .cyber-table__toolbar {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+    
+    .cyber-table__search {
+        max-width: none;
+        width: 100%;
+    }
+    
+    .cyber-table__header,
+    .cyber-table__cell {
+        padding: var(--spacing-sm);
+        font-size: var(--font-xs);
+    }
+    
+    .cyber-table__header-text {
+        font-size: var(--font-xs);
+    }
+    
+    .cyber-table__pagination {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .cyber-table__pagination-controls {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .cyber-table__pagination-btn {
+        min-width: 32px;
+        height: 32px;
+        padding: var(--spacing-xs);
+    }
+}
+
+@media (max-width: 480px) {
+    .cyber-table-container {
+        border-radius: var(--radius-md);
+    }
+    
+    .cyber-table__toolbar {
+        padding: var(--spacing-sm);
+    }
+    
+    .cyber-table__header,
+    .cyber-table__cell {
+        padding: var(--spacing-xs);
+    }
+    
+    .cyber-table__pagination {
+        padding: var(--spacing-md);
+    }
+    
+    /* 모바일에서 테이블을 카드형태로 변환 */
+    .cyber-table--mobile-cards .cyber-table__head {
+        display: none;
+    }
+    
+    .cyber-table--mobile-cards .cyber-table__row--body {
+        display: block;
+        margin-bottom: var(--spacing-md);
+        border: 1px solid var(--border-muted);
+        border-radius: var(--radius-md);
+        background: var(--bg-card);
+    }
+    
+    .cyber-table--mobile-cards .cyber-table__cell {
+        display: block;
+        padding: var(--spacing-sm);
+        border-bottom: 1px solid var(--border-muted);
+        text-align: left;
+    }
+    
+    .cyber-table--mobile-cards .cyber-table__cell:last-child {
+        border-bottom: none;
+    }
+    
+    .cyber-table--mobile-cards .cyber-table__cell::before {
+        content: attr(data-label) ": ";
+        font-weight: var(--font-bold);
+        color: var(--text-primary);
+        display: inline-block;
+        min-width: 100px;
+    }
+}
+
+/* ===== 스크롤 그림자 ===== */
+.cyber-table__wrapper {
+    position: relative;
+}
+
+.cyber-table__wrapper::before,
+.cyber-table__wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    pointer-events: none;
+    z-index: 2;
+    transition: opacity var(--transition-normal);
+}
+
+.cyber-table__wrapper::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg-glass), transparent);
+    opacity: 0;
+}
+
+.cyber-table__wrapper::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--bg-glass), transparent);
+    opacity: 0;
+}
+
+.cyber-table__wrapper.scroll-left::before {
+    opacity: 1;
+}
+
+.cyber-table__wrapper.scroll-right::after {
+    opacity: 1;
+}
+
+/* ===== 선택된 행 ===== */
+.cyber-table__row--selected {
+    background: var(--info-bg);
+    border-color: var(--primary-blue);
+}
+
+.cyber-table__row--selected .cyber-table__cell {
+    color: var(--primary-blue);
+    font-weight: var(--font-medium);
+}
+
+/* ===== 체크박스 열 ===== */
+.cyber-table__checkbox {
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    background: var(--bg-glass);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.cyber-table__checkbox:checked {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+}
+
+.cyber-table__checkbox:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* ===== 액션 버튼 ===== */
+.cyber-table__actions {
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.cyber-table__action-btn {
+    padding: var(--spacing-xs);
+    background: var(--bg-glass);
+    border: 1px solid var(--border-muted);
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+}
+
+.cyber-table__action-btn:hover {
+    background: var(--bg-glass-hover);
+    border-color: var(--primary-blue);
+    color: var(--primary-blue);
+    transform: scale(1.1);
+}
+
+.cyber-table__action-btn--danger:hover {
+    border-color: var(--danger-red);
+    color: var(--danger-red);
+}
+
+.cyber-table__action-btn--success:hover {
+    border-color: var(--success-green);
+    color: var(--success-green);
+}
+
+/* ===== 접근성 ===== */
+.cyber-table__header:focus,
+.cyber-table__row--body:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cyber-table__row,
+    .cyber-table__pagination-btn,
+    .cyber-table__action-btn {
+        transition: none;
+    }
+    
+    .cyber-table--hoverable .cyber-table__row--body:hover {
+        transform: none;
+    }
+    
+    .cyber-table__loading-spinner {
+        animation: none;
+    }
+}
+
+/* ===== 고대비 모드 ===== */
+@media (prefers-contrast: high) {
+    .cyber-table-container {
+        border-width: 2px;
+    }
+    
+    .cyber-table__row {
+        border-bottom-width: 2px;
+    }
+    
+    .cyber-table__header {
+        border-right-width: 2px;
+    }
+    
+    .cyber-table__cell {
+        border-right-width: 2px;
+    }
+}
+
+/* ===== 애니메이션 최적화 ===== */
+.cyber-table__row {
+    transform: translateZ(0);
+    will-change: transform, background-color;
+}
+
+.cyber-table__pagination-btn,
+.cyber-table__action-btn {
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+/* ===== 스핀 애니메이션 ===== */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

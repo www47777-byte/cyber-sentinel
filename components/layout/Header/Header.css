@@ -1,0 +1,462 @@
+/* 📁 파일 위치: src/components/layout/Header/Header.css */
+
+/* ==========================================
+   🎯 Header.css - 사이버네틱 헤더 스타일
+   ========================================== */
+
+.cyber-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(0, 20, 40, 0.9) 100%);
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid var(--primary-blue, #00ccff);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--spacing-lg, 20px);
+    z-index: 1000;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ===== 로고 영역 ===== */
+.header-left {
+    display: flex;
+    align-items: center;
+    min-width: 280px;
+}
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 15px);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logo-section:hover {
+    transform: scale(1.05);
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--primary-blue, #00ccff);
+    filter: drop-shadow(0 0 15px var(--primary-blue, #00ccff));
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(5deg); }
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.logo-title {
+    font-size: var(--font-xl, 24px);
+    font-weight: var(--font-bold, 700);
+    color: var(--text-primary, #ffffff);
+    margin: 0;
+    text-shadow: 0 0 10px var(--primary-blue, #00ccff);
+    line-height: 1.2;
+}
+
+.logo-subtitle {
+    font-size: var(--font-sm, 12px);
+    color: var(--primary-blue, #00ccff);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 2px;
+}
+
+/* ===== 중앙 시스템 상태 영역 ===== */
+.header-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 var(--spacing-lg, 20px);
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xl, 30px);
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-md, 15px) var(--spacing-lg, 20px);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm, 10px);
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.online {
+    background: var(--success-green, #00ff41);
+    box-shadow: 0 0 10px var(--success-green, #00ff41);
+}
+
+.status-dot.offline {
+    background: var(--danger-red, #ff0040);
+    box-shadow: 0 0 10px var(--danger-red, #ff0040);
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.2); }
+}
+
+.status-text {
+    font-size: var(--font-sm, 14px);
+    color: var(--text-primary, #ffffff);
+    font-weight: var(--font-medium, 500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.threat-counter {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 8px);
+}
+
+.threat-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--primary-blue, #00ccff);
+}
+
+.threat-count {
+    font-size: var(--font-sm, 14px);
+    font-weight: var(--font-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.network-status {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs, 8px);
+}
+
+.network-icon {
+    width: 18px;
+    height: 18px;
+}
+
+.network-icon.online {
+    color: var(--success-green, #00ff41);
+}
+
+.network-icon.offline {
+    color: var(--danger-red, #ff0040);
+}
+
+.network-text {
+    font-size: var(--font-xs, 12px);
+    font-weight: var(--font-medium, 500);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.network-text.online {
+    color: var(--success-green, #00ff41);
+}
+
+.network-text.offline {
+    color: var(--danger-red, #ff0040);
+}
+
+/* ===== 오른쪽 사용자 영역 ===== */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 15px);
+    min-width: 500px;
+    justify-content: flex-end;
+}
+
+/* 날짜/시간 */
+.datetime-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: var(--spacing-md, 15px);
+}
+
+.current-time {
+    font-size: var(--font-lg, 18px);
+    font-weight: var(--font-bold, 700);
+    color: var(--primary-blue, #00ccff);
+    text-shadow: 0 0 10px var(--primary-blue, #00ccff);
+    font-family: 'JetBrains Mono', monospace;
+    line-height: 1;
+}
+
+.current-date {
+    font-size: var(--font-xs, 11px);
+    color: var(--text-secondary, #888888);
+    margin-top: 2px;
+    text-align: right;
+}
+
+/* 버튼 공통 스타일 */
+.notification-btn,
+.sound-btn,
+.settings-btn,
+.logout-btn {
+    position: relative;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.notification-btn:hover,
+.sound-btn:hover,
+.settings-btn:hover {
+    background: rgba(0, 204, 255, 0.1);
+    border-color: var(--primary-blue, #00ccff);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 204, 255, 0.3);
+}
+
+.logout-btn:hover {
+    background: rgba(255, 0, 64, 0.1);
+    border-color: var(--danger-red, #ff0040);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 64, 0.3);
+}
+
+/* 아이콘 */
+.notification-icon,
+.settings-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-blue, #00ccff);
+}
+
+.sound-btn svg {
+    width: 20px;
+    height: 20px;
+    color: var(--primary-blue, #00ccff);
+}
+
+.logout-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--danger-red, #ff0040);
+}
+
+/* 알림 배지 */
+.notification-section {
+    position: relative;
+}
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    background: var(--danger-red, #ff0040);
+    color: var(--text-primary, #ffffff);
+    border-radius: 50%;
+    font-size: var(--font-xs, 10px);
+    font-weight: var(--font-bold, 700);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--bg-primary, #0a0a0a);
+    animation: notificationPulse 2s ease-in-out infinite;
+}
+
+@keyframes notificationPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* 사용자 정보 */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md, 12px);
+    background: rgba(0, 0, 0, 0.3);
+    padding: var(--spacing-sm, 10px) var(--spacing-md, 15px);
+    border: 1px solid rgba(0, 204, 255, 0.3);
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.user-section:hover {
+    background: rgba(0, 204, 255, 0.1);
+    border-color: var(--primary-blue, #00ccff);
+    transform: translateY(-1px);
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.user-name {
+    font-size: var(--font-sm, 14px);
+    font-weight: var(--font-bold, 700);
+    color: var(--text-primary, #ffffff);
+    line-height: 1.2;
+}
+
+.user-role {
+    font-size: var(--font-xs, 11px);
+    color: var(--primary-blue, #00ccff);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 1px;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--primary-blue, #00ccff), rgba(0, 204, 255, 0.3));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 204, 255, 0.5);
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--bg-primary, #0a0a0a);
+}
+
+/* ===== 배경 애니메이션 ===== */
+.header-background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.scan-line {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary-blue, #00ccff), transparent);
+    animation: scanMove 8s linear infinite;
+}
+
+@keyframes scanMove {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.cyber-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        linear-gradient(90deg, rgba(0, 204, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(rgba(0, 204, 255, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.3;
+    animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(20px, 20px); }
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 1200px) {
+    .header-right {
+        min-width: 400px;
+    }
+    
+    .user-info {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    .cyber-header {
+        padding: 0 var(--spacing-md, 15px);
+    }
+    
+    .header-center {
+        margin: 0 var(--spacing-md, 15px);
+    }
+    
+    .system-status {
+        gap: var(--spacing-md, 15px);
+        padding: var(--spacing-sm, 10px) var(--spacing-md, 15px);
+    }
+    
+    .datetime-section {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .cyber-header {
+        height: 70px;
+    }
+    
+    .logo-text {
+        display: none;
+    }
+    
+    .header-center {
+        display: none;
+    }
+    
+    .header-right {
+        min-width: auto;
+        gap: var(--spacing-sm, 10px);
+    }
+}
+
+/* ===== 다크모드 지원 ===== */
+@media (prefers-color-scheme: dark) {
+    .cyber-header {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(0, 15, 30, 0.95) 100%);
+    }
+}

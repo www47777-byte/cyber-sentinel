@@ -1,0 +1,399 @@
+/* ==========================================
+   🟢 StatusIndicator.css - 상태 표시기 스타일
+   ========================================== */
+
+.cyber-status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+}
+
+/* ===== 크기 설정 ===== */
+.cyber-status--small {
+    gap: var(--spacing-xs);
+}
+
+.cyber-status--small .cyber-status__label {
+    font-size: var(--font-xs);
+}
+
+.cyber-status--medium .cyber-status__label {
+    font-size: var(--font-sm);
+}
+
+.cyber-status--large .cyber-status__label {
+    font-size: var(--font-md);
+}
+
+/* ===== 점(Dot) 변형 ===== */
+.cyber-status__dot {
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.cyber-status--small .cyber-status__dot {
+    width: 8px;
+    height: 8px;
+}
+
+.cyber-status--medium .cyber-status__dot {
+    width: 12px;
+    height: 12px;
+}
+
+.cyber-status--large .cyber-status__dot {
+    width: 16px;
+    height: 16px;
+}
+
+/* ===== 아이콘 변형 ===== */
+.cyber-status__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.cyber-status--small .cyber-status__icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.cyber-status--medium .cyber-status__icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.cyber-status--large .cyber-status__icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ===== 배지 변형 ===== */
+.cyber-status__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-full);
+    border: 1px solid currentColor;
+    font-size: var(--font-xs);
+    font-weight: var(--font-medium);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+}
+
+.cyber-status__badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.cyber-status__badge-text {
+    white-space: nowrap;
+}
+
+/* ===== 펄스 변형 ===== */
+.cyber-status__pulse-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cyber-status__pulse-dot {
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.cyber-status--small .cyber-status__pulse-dot {
+    width: 8px;
+    height: 8px;
+}
+
+.cyber-status--medium .cyber-status__pulse-dot {
+    width: 12px;
+    height: 12px;
+}
+
+.cyber-status--large .cyber-status__pulse-dot {
+    width: 16px;
+    height: 16px;
+}
+
+.cyber-status__pulse-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.cyber-status--small .cyber-status__pulse-ring {
+    width: 16px;
+    height: 16px;
+}
+
+.cyber-status--medium .cyber-status__pulse-ring {
+    width: 24px;
+    height: 24px;
+}
+
+.cyber-status--large .cyber-status__pulse-ring {
+    width: 32px;
+    height: 32px;
+}
+
+/* ===== 라벨 ===== */
+.cyber-status__label {
+    font-weight: var(--font-medium);
+    white-space: nowrap;
+    text-transform: capitalize;
+}
+
+/* ===== 글로우 효과 ===== */
+.cyber-status__glow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    opacity: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ===== 애니메이션 효과 ===== */
+.cyber-status--animated .cyber-status__dot,
+.cyber-status--animated .cyber-status__pulse-dot {
+    animation: status-pulse 2s ease-in-out infinite;
+}
+
+.cyber-status--animated .cyber-status__pulse-ring {
+    animation: pulse-ring 2s ease-out infinite;
+}
+
+.cyber-status--animated .cyber-status__icon {
+    animation: icon-glow 3s ease-in-out infinite;
+}
+
+.cyber-status--animated .cyber-status__badge {
+    animation: badge-glow 3s ease-in-out infinite;
+}
+
+.cyber-status--animated .cyber-status__glow {
+    animation: glow-effect 2s ease-in-out infinite;
+}
+
+@keyframes status-pulse {
+    0%, 100% { 
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: translate(-50%, -50%) scale(0.8);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.8);
+        opacity: 0;
+    }
+}
+
+@keyframes icon-glow {
+    0%, 100% { 
+        filter: drop-shadow(0 0 4px currentColor);
+    }
+    50% { 
+        filter: drop-shadow(0 0 12px currentColor);
+    }
+}
+
+@keyframes badge-glow {
+    0%, 100% { 
+        box-shadow: 0 0 5px currentColor;
+    }
+    50% { 
+        box-shadow: 0 0 15px currentColor;
+    }
+}
+
+@keyframes glow-effect {
+    0%, 100% { 
+        opacity: 0;
+    }
+    50% { 
+        opacity: 0.3;
+    }
+}
+
+/* ===== 상태별 특별 효과 ===== */
+
+/* Loading 상태 */
+.cyber-status--loading .cyber-status__icon {
+    animation: loading-spin 1s linear infinite;
+}
+
+@keyframes loading-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Error 상태 - 급속 깜빡임 */
+.cyber-status--error.cyber-status--animated .cyber-status__dot,
+.cyber-status--error.cyber-status--animated .cyber-status__pulse-dot {
+    animation: error-blink 1s ease-in-out infinite;
+}
+
+@keyframes error-blink {
+    0%, 50% { opacity: 1; }
+    25%, 75% { opacity: 0.3; }
+}
+
+/* Success 상태 - 부드러운 글로우 */
+.cyber-status--success.cyber-status--animated .cyber-status__dot,
+.cyber-status--success.cyber-status--animated .cyber-status__pulse-dot {
+    animation: success-glow 3s ease-in-out infinite;
+}
+
+@keyframes success-glow {
+    0%, 100% { 
+        box-shadow: 0 0 8px currentColor;
+    }
+    50% { 
+        box-shadow: 0 0 16px currentColor, 0 0 24px currentColor;
+    }
+}
+
+/* Warning 상태 - 불규칙한 깜빡임 */
+.cyber-status--warning.cyber-status--animated .cyber-status__dot,
+.cyber-status--warning.cyber-status--animated .cyber-status__pulse-dot {
+    animation: warning-flicker 2s linear infinite;
+}
+
+@keyframes warning-flicker {
+    0%, 80%, 100% { opacity: 1; }
+    85%, 95% { opacity: 0.4; }
+}
+
+/* Online/Active 상태 - 안정적인 펄스 */
+.cyber-status--online.cyber-status--animated .cyber-status__pulse-ring,
+.cyber-status--active.cyber-status--animated .cyber-status__pulse-ring {
+    animation: stable-pulse 3s ease-in-out infinite;
+}
+
+@keyframes stable-pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.6;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.2);
+        opacity: 0.2;
+    }
+}
+
+/* ===== 호버 효과 ===== */
+.cyber-status:hover .cyber-status__dot,
+.cyber-status:hover .cyber-status__pulse-dot {
+    transform: scale(1.2);
+    transition: transform var(--transition-normal);
+}
+
+.cyber-status:hover .cyber-status__icon {
+    transform: scale(1.1);
+    transition: transform var(--transition-normal);
+}
+
+.cyber-status:hover .cyber-status__badge {
+    transform: scale(1.05);
+    transition: transform var(--transition-normal);
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .cyber-status {
+        gap: var(--spacing-xs);
+    }
+    
+    .cyber-status--small .cyber-status__dot {
+        width: 6px;
+        height: 6px;
+    }
+    
+    .cyber-status--medium .cyber-status__dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .cyber-status--large .cyber-status__dot {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .cyber-status__badge {
+        padding: 2px var(--spacing-xs);
+        font-size: 10px;
+    }
+    
+    .cyber-status__label {
+        font-size: var(--font-xs);
+    }
+}
+
+/* ===== 접근성 ===== */
+@media (prefers-reduced-motion: reduce) {
+    .cyber-status--animated .cyber-status__dot,
+    .cyber-status--animated .cyber-status__pulse-dot,
+    .cyber-status--animated .cyber-status__pulse-ring,
+    .cyber-status--animated .cyber-status__icon,
+    .cyber-status--animated .cyber-status__badge,
+    .cyber-status--animated .cyber-status__glow {
+        animation: none;
+    }
+}
+
+/* ===== 고대비 모드 ===== */
+@media (prefers-contrast: high) {
+    .cyber-status__dot,
+    .cyber-status__pulse-dot {
+        border: 1px solid currentColor;
+    }
+    
+    .cyber-status__badge {
+        border-width: 2px;
+    }
+    
+    .cyber-status__pulse-ring {
+        border-width: 3px;
+    }
+}
+
+/* ===== 애니메이션 최적화 ===== */
+.cyber-status__dot,
+.cyber-status__pulse-dot,
+.cyber-status__icon,
+.cyber-status__badge {
+    transform: translateZ(0);
+    will-change: transform;
+}

@@ -1,0 +1,220 @@
+/* ==========================================
+   📄 Card.css - 사이버네틱 카드 스타일
+   ========================================== */
+
+.cyber-card {
+    position: relative;
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-effect);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ===== 카드 크기 ===== */
+.cyber-card--small {
+    padding: var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.cyber-card--medium {
+    padding: var(--spacing-lg);
+}
+
+.cyber-card--large {
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-xl);
+}
+
+/* ===== 카드 변형 ===== */
+.cyber-card--default {
+    border-color: var(--border-secondary);
+}
+
+.cyber-card--primary {
+    border-color: var(--primary-blue);
+    background: linear-gradient(135deg, var(--bg-glass), rgba(0, 204, 255, 0.05));
+}
+
+.cyber-card--success {
+    border-color: var(--success-green);
+    background: linear-gradient(135deg, var(--bg-glass), var(--success-bg));
+}
+
+.cyber-card--warning {
+    border-color: var(--warning-yellow);
+    background: linear-gradient(135deg, var(--bg-glass), var(--warning-bg));
+}
+
+.cyber-card--danger {
+    border-color: var(--danger-red);
+    background: linear-gradient(135deg, var(--bg-glass), var(--danger-bg));
+}
+
+.cyber-card--glass {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ===== 호버 가능한 카드 ===== */
+.cyber-card--hoverable:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+    border-color: var(--primary-blue);
+}
+
+.cyber-card--hoverable:hover::before {
+    opacity: 1;
+}
+
+.cyber-card--hoverable::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(0, 204, 255, 0.1), transparent);
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+/* ===== 클릭 가능한 카드 ===== */
+.cyber-card--clickable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.cyber-card--clickable:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-large);
+}
+
+.cyber-card--clickable:active {
+    transform: translateY(0);
+    transition: transform 0.1s ease;
+}
+
+.cyber-card--clickable:focus {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
+/* ===== 글로우 효과 ===== */
+.cyber-card--glowing {
+    animation: card-glow 3s ease-in-out infinite;
+}
+
+.cyber-card__glow {
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        transparent, 
+        var(--primary-blue), 
+        transparent, 
+        var(--accent-blue), 
+        transparent
+    );
+    background-size: 400% 400%;
+    border-radius: inherit;
+    z-index: -1;
+    animation: glow-animation 4s ease-in-out infinite;
+    opacity: 0.6;
+}
+
+@keyframes card-glow {
+    0%, 100% { 
+        box-shadow: var(--shadow-medium);
+    }
+    50% { 
+        box-shadow: 0 8px 32px rgba(0, 204, 255, 0.4);
+    }
+}
+
+@keyframes glow-animation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== 애니메이션 카드 ===== */
+.cyber-card--animated {
+    animation: card-float 6s ease-in-out infinite;
+}
+
+.cyber-card__border-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 2px solid transparent;
+    border-radius: inherit;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary-blue), 
+        transparent
+    ) border-box;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    animation: border-flow 3s linear infinite;
+}
+
+@keyframes card-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes border-flow {
+    0% { 
+        background-position: 0% 0%;
+        opacity: 0.5;
+    }
+    50% { 
+        opacity: 1;
+    }
+    100% { 
+        background-position: 100% 0%;
+        opacity: 0.5;
+    }
+}
+
+/* ===== 카드 헤더 ===== */
+.cyber-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-muted);
+}
+
+.cyber-card__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    color: var(--primary-blue);
+    flex-shrink: 0;
+}
+
+.cyber-card--small .cyber-card__icon {
+    width: 32px;
+    height: 32px;
+}
+
+.cyber-card--large .cyber-card__icon {
+    width: 48px;
+    height: 48px;
+}

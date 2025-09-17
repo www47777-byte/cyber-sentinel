@@ -1,0 +1,305 @@
+/* ==========================================
+   📊 ProgressBar.css - 사이버네틱 진행바 스타일
+   ========================================== */
+
+.cyber-progress {
+    position: relative;
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ===== 색상 변수 정의 ===== */
+.cyber-progress {
+    --color-primary: var(--primary-blue);
+    --color-success: var(--success-green);
+    --color-warning: var(--warning-yellow);
+    --color-danger: var(--danger-red);
+    --color-info: var(--info-cyan);
+}
+
+/* ===== 헤더 (라벨 + 퍼센티지) ===== */
+.cyber-progress__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--spacing-xs);
+}
+
+.cyber-progress__label {
+    font-size: var(--font-sm);
+    font-weight: var(--font-medium);
+    color: var(--text-secondary);
+}
+
+.cyber-progress__percentage {
+    font-size: var(--font-sm);
+    font-weight: var(--font-bold);
+    color: var(--progress-color, var(--primary-blue));
+    text-shadow: 0 0 8px currentColor;
+    font-family: 'Courier New', monospace;
+}
+
+/* ===== 진행바 트랙 ===== */
+.cyber-progress__track {
+    position: relative;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    border: 1px solid var(--border-muted);
+}
+
+/* ===== 진행바 크기 ===== */
+.cyber-progress--small .cyber-progress__track {
+    height: 6px;
+}
+
+.cyber-progress--medium .cyber-progress__track {
+    height: 10px;
+}
+
+.cyber-progress--large .cyber-progress__track {
+    height: 16px;
+}
+
+/* ===== 진행바 채우기 ===== */
+.cyber-progress__fill {
+    height: 100%;
+    width: var(--progress-value, 0%);
+    background: linear-gradient(90deg, 
+        var(--progress-color, var(--primary-blue)) 0%, 
+        color-mix(in srgb, var(--progress-color, var(--primary-blue)) 80%, white) 50%,
+        var(--progress-color, var(--primary-blue)) 100%
+    );
+    border-radius: var(--radius-full);
+    position: relative;
+    overflow: hidden;
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== 반짝임 효과 ===== */
+.cyber-progress__shine {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 50%, 
+        transparent 100%
+    );
+    animation: progress-shine 2.5s ease-in-out infinite;
+}
+
+@keyframes progress-shine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+}
+
+/* ===== 스트라이프 효과 ===== */
+.cyber-progress--striped .cyber-progress__stripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: linear-gradient(45deg, 
+        rgba(255, 255, 255, 0.15) 25%, 
+        transparent 25%, 
+        transparent 50%, 
+        rgba(255, 255, 255, 0.15) 50%, 
+        rgba(255, 255, 255, 0.15) 75%, 
+        transparent 75%, 
+        transparent
+    );
+    background-size: 16px 16px;
+}
+
+.cyber-progress--animated .cyber-progress__stripes {
+    animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+    0% { background-position: 0 0; }
+    100% { background-position: 16px 0; }
+}
+
+/* ===== 글로우 효과 ===== */
+.cyber-progress__glow {
+    position: absolute;
+    top: -2px;
+    left: 0;
+    bottom: -2px;
+    background: var(--progress-color, var(--primary-blue));
+    border-radius: var(--radius-full);
+    opacity: 0.3;
+    filter: blur(4px);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.cyber-progress--glowing .cyber-progress__glow {
+    animation: progress-glow 2s ease-in-out infinite;
+}
+
+@keyframes progress-glow {
+    0%, 100% { 
+        filter: blur(4px);
+        opacity: 0.3;
+    }
+    50% { 
+        filter: blur(6px);
+        opacity: 0.6;
+    }
+}
+
+/* ===== 세그먼트 표시 ===== */
+.cyber-progress__segments {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.cyber-progress__segment {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translateX(-50%);
+}
+
+/* ===== 변형별 색상 ===== */
+.cyber-progress--primary {
+    --progress-color: var(--primary-blue);
+}
+
+.cyber-progress--success {
+    --progress-color: var(--success-green);
+}
+
+.cyber-progress--warning {
+    --progress-color: var(--warning-yellow);
+}
+
+.cyber-progress--danger {
+    --progress-color: var(--danger-red);
+}
+
+.cyber-progress--info {
+    --progress-color: var(--info-cyan);
+}
+
+/* ===== 특별 애니메이션 ===== */
+.cyber-progress--animated .cyber-progress__fill {
+    position: relative;
+}
+
+.cyber-progress--animated .cyber-progress__fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 1px;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+    animation: progress-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes progress-pulse {
+    0%, 100% { 
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    50% { 
+        opacity: 0.6;
+        transform: scaleY(0.8);
+    }
+}
+
+/* ===== 성능별 특별 효과 ===== */
+.cyber-progress--success .cyber-progress__fill {
+    animation: success-glow 3s ease-in-out infinite;
+}
+
+.cyber-progress--danger .cyber-progress__fill {
+    animation: danger-pulse 1.5s ease-in-out infinite;
+}
+
+.cyber-progress--warning .cyber-progress__fill {
+    animation: warning-flicker 2s ease-in-out infinite;
+}
+
+@keyframes success-glow {
+    0%, 100% { 
+        filter: brightness(1);
+    }
+    50% { 
+        filter: brightness(1.2);
+    }
+}
+
+@keyframes danger-pulse {
+    0%, 100% { 
+        opacity: 1;
+    }
+    50% { 
+        opacity: 0.7;
+    }
+}
+
+@keyframes warning-flicker {
+    0%, 90%, 100% { 
+        opacity: 1;
+    }
+    93%, 97% { 
+        opacity: 0.8;
+    }
+}
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+    .cyber-progress__header {
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .cyber-progress__label,
+    .cyber-progress__percentage {
+        font-size: var(--font-xs);
+    }
+    
+    .cyber-progress--small .cyber-progress__track {
+        height: 4px;
+    }
+    
+    .cyber-progress--medium .cyber-progress__track {
+        height: 8px;
+    }
+    
+    .cyber-progress--large .cyber-progress__track {
+        height: 12px;
+    }
+}
+
+/* ===== 접근성 ===== */
+@media (prefers-reduced-motion: reduce) {
+    .cyber-progress__fill,
+    .cyber-progress__glow,
+    .cyber-progress__shine,
+    .cyber-progress__stripes {
+        animation: none;
+        transition: none;
+    }
+}
+
+/* ===== 애니메이션 최적화 ===== */
+.cyber-progress__fill,
+.cyber-progress__glow {
+    transform: translateZ(0);
+    will-change: width;
+}
